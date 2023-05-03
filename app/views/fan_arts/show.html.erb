@@ -1,0 +1,101 @@
+<div>
+  <div>
+    <h1>
+      Fan art #<%= @the_fan_art.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/fan_arts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_fan_art/<%= @the_fan_art.id %>">
+          Delete fan art
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Topic
+      </dt>
+      <dd>
+        <%= @the_fan_art.topic %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_fan_art.user_id %>
+      </dd>
+
+      <dt>
+        Photos count
+      </dt>
+      <dd>
+        <%= @the_fan_art.photos_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_fan_art.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_fan_art.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit fan art
+    </h2>
+
+    <form action="/modify_fan_art/<%= @the_fan_art.id %>"  method="post" >
+      <div>
+        <label for="topic_box">
+          Topic
+        </label>
+
+        <input type="text" id="topic_box" name="query_topic" value="<%= @the_fan_art.topic %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_fan_art.user_id %>">
+      </div>
+
+      <div>
+        <label for="photos_count_box">
+          Photos count
+        </label>
+
+        <input type="text" id="photos_count_box" name="query_photos_count" value="<%= @the_fan_art.photos_count %>">
+      </div>
+
+      <button>
+        Update fan art
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

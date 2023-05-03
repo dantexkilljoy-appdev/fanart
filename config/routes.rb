@@ -2,6 +2,25 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Fan art resource:
+
+  # CREATE
+  post("/insert_fan_art", { :controller => "fan_arts", :action => "create" })
+          
+  # READ
+  get("/fan_arts", { :controller => "fan_arts", :action => "index" })
+  
+  get("/fan_arts/:path_id", { :controller => "fan_arts", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_fan_art/:path_id", { :controller => "fan_arts", :action => "update" })
+  
+  # DELETE
+  get("/delete_fan_art/:path_id", { :controller => "fan_arts", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the Photo resource:
 
   # CREATE
