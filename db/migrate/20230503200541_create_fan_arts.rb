@@ -3,7 +3,6 @@ class CreateFanArts < ActiveRecord::Migration[6.0]
     create_table :fan_arts do |t|
       t.string :topic
       t.integer :user_id
-      t.string :message
 
       t.timestamps
     end
