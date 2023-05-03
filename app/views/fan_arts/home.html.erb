@@ -1,0 +1,41 @@
+<div>
+  <div>
+    <h1>
+      Welcome to Fan Art Generator
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Ready for you next piece?
+    </h2>
+
+    <form action="/insert_fan_art" method="post">
+      <div>
+        <label for="topic">
+          Want a specific genre?
+        </label>
+        <select id="topic" name="query_topic">
+          <option value="anime">Anime</option>
+          <option value="video games">Video Games</option>
+          <option value="comics">Comics</option>
+          <option value="">Surprise me?</option>
+        </select>
+      </div>
+
+      <div>
+        <input type="hidden" name="query_user_id" value="<%# @user.id %>">
+      </div>
+
+      <button>
+        Generate an Idea
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

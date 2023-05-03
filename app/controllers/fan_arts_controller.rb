@@ -1,4 +1,8 @@
 class FanArtsController < ApplicationController
+  def home
+    render({ template: "fan_arts/home.html.erb" })
+  end
+
   def index
     matching_fan_arts = FanArt.all
 
@@ -21,10 +25,10 @@ class FanArtsController < ApplicationController
     the_fan_art = FanArt.new
     the_fan_art.topic = params.fetch("query_topic")
     the_fan_art.user_id = params.fetch("query_user_id")
-    the_fan_art.photos_count = params.fetch("query_photos_count")
 
     if the_fan_art.valid?
       the_fan_art.save
+
       redirect_to("/fan_arts", { :notice => "Fan art created successfully." })
     else
       redirect_to("/fan_arts", { :alert => the_fan_art.errors.full_messages.to_sentence })
@@ -41,7 +45,7 @@ class FanArtsController < ApplicationController
 
     if the_fan_art.valid?
       the_fan_art.save
-      redirect_to("/fan_arts/#{the_fan_art.id}", { :notice => "Fan art updated successfully."} )
+      redirect_to("/fan_arts/#{the_fan_art.id}", { :notice => "Fan art updated successfully." })
     else
       redirect_to("/fan_arts/#{the_fan_art.id}", { :alert => the_fan_art.errors.full_messages.to_sentence })
     end
@@ -53,6 +57,6 @@ class FanArtsController < ApplicationController
 
     the_fan_art.destroy
 
-    redirect_to("/fan_arts", { :notice => "Fan art deleted successfully."} )
+    redirect_to("/fan_arts", { :notice => "Fan art deleted successfully." })
   end
 end

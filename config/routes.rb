@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get("/", { controller: "fan_arts", action: "index" })
+  get("/", { controller: "fan_arts", action: "home" })
 
   # Routes for the Like resource:
 
