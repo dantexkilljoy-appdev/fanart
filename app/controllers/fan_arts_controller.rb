@@ -1,4 +1,6 @@
 class FanArtsController < ApplicationController
+  require "openai"
+
   def home
     render({ template: "fan_arts/home.html.erb" })
   end
@@ -33,21 +35,23 @@ class FanArtsController < ApplicationController
       system_message.fan_art_id = @the_fan_art.id
       system_message.role = "system"
       system_message.content = "You are a #{@the_fan_art.topic} fanatic. Give the user a drawing project idea based on #{@the_fan_art.topic} that will include random #{@the_fan_art.topic} characters doing anything."
+      system_message.user_id = @current_user.id
       system_message.save
 
       user_message = Message.new
       user_message.fan_art_id = @the_fan_art.id
       user_message.role = "user"
       user_message.content = "What #{@the_fan_art.topic} characters should I draw?"
+      user_message.user_id = @current_user.id
       user_message.save
 
-      client = OpenAI::Client.new
+      client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
 
       api_messages_array = Array.new
 
-      fan_art_messages = Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at)
+      @fan_art_messages = Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at)
 
-      fan_art_messages.each do |the_message|
+      @fan_art_messages.each do |the_message|
         message_hash = { :role => the_message.role, :content => the_message.content }
 
         api_messages_array.push(message_hash)
@@ -55,7 +59,7 @@ class FanArtsController < ApplicationController
 
       @response = client.chat(
         parameters: {
-          model: "gpt - 4",
+          model: "gpt-4",
           messages: [{ role: "user", content: "Hello!" }],
           temperature: 1.0,
         },
@@ -64,7 +68,8 @@ class FanArtsController < ApplicationController
       assistant_message = Message.new
       assistant_message.fan_art_id = @the_fan_art.id
       assistant_message.role = "assistant"
-      # assistant_message.content = response.fetch("message").fetch("content")
+      #assistant_message.content = @response.fetch("message").fetch("content")
+      assistant_message.user_id = @current_user.id
       assistant_message.save
 
       redirect_to("/", { :notice => "Fan art created successfully." })
