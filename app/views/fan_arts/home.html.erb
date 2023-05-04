@@ -28,7 +28,7 @@
       </div>
 
       <div>
-        <input type="hidden" name="query_user_id" value="<%# @user.id %>">
+        <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
       </div>
 
       <button>
@@ -39,3 +39,5 @@
 </div>
 
 <hr>
+
+<%= @response %>
