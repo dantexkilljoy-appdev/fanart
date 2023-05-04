@@ -10,6 +10,19 @@ class FanArtsController < ApplicationController
 
     @list_of_fan_arts = matching_fan_arts.order({ :created_at => :desc })
 
+    client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
+
+    @response = client.chat(
+      parameters: {
+        model: "gpt-4",
+        messages: [{ role: "system", content: system_message.content },
+                   { role: "user", content: user_message.content }],
+        temperature: 1.0,
+      },
+    )
+
+    @response.fetch("choices").at(0).fetch("message").fetch("content")
+
     render({ :template => "fan_arts/index.html.erb" })
   end
 
@@ -60,21 +73,24 @@ class FanArtsController < ApplicationController
       @response = client.chat(
         parameters: {
           model: "gpt-4",
-          messages: [{ role: "user", content: "Hello!" }],
+          messages: [{ role: "system", content: system_message.content },
+                     { role: "user", content: user_message.content }],
           temperature: 1.0,
         },
       )
 
-      assistant_message = Message.new
-      assistant_message.fan_art_id = @the_fan_art.id
-      assistant_message.role = "assistant"
-      #assistant_message.content = @response.fetch("message").fetch("content")
-      assistant_message.user_id = @current_user.id
-      assistant_message.save
+      @result = @response.fetch("choices").at(0).fetch("message").fetch("content")
 
-      redirect_to("/", { :notice => "Fan art created successfully." })
+      @assistant_message = Message.new
+      @assistant_message.fan_art_id = @the_fan_art.id
+      @assistant_message.role = "assistant"
+      @assistant_message.content = @response.fetch("choices").at(0).fetch("message").fetch("content")
+      @assistant_message.user_id = @current_user.id
+      @assistant_message.save
+
+      redirect_to("/fan_arts/#{@the_fan_art.id}", { :notice => "Fan art created successfully." })
     else
-      redirect_to("/", { :alert => @the_fan_art.errors.full_messages.to_sentence })
+      redirect_to("/fan_arts/#{@the_fan_art.id}", { :alert => @the_fan_art.errors.full_messages.to_sentence })
     end
   end
 

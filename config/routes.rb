@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   post("/insert_fan_art", { :controller => "fan_arts", :action => "create" })
 
   # READ
-  get("/fan_arts", { :controller => "fan_arts", :action => "index" })
+  get("/fan_arts/index.html.erb", { :controller => "fan_arts", :action => "index" })
 
   get("/fan_arts/:path_id", { :controller => "fan_arts", :action => "show" })
 
