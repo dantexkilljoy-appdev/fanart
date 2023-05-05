@@ -8,20 +8,7 @@ class FanArtsController < ApplicationController
   def index
     matching_fan_arts = FanArt.all
 
-    @list_of_fan_arts = matching_fan_arts.order({ :created_at => :desc })
-
-    client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
-
-    @response = client.chat(
-      parameters: {
-        model: "gpt-4",
-        messages: [{ role: "system", content: system_message.content },
-                   { role: "user", content: user_message.content }],
-        temperature: 1.0,
-      },
-    )
-
-    @response.fetch("choices").at(0).fetch("message").fetch("content")
+    @list_of_fan_arts = matching_fan_arts.where({ user_id: @current_user }).order({ :created_at => :desc })
 
     render({ :template => "fan_arts/index.html.erb" })
   end
@@ -44,37 +31,13 @@ class FanArtsController < ApplicationController
     if @the_fan_art.valid?
       @the_fan_art.save
 
-      system_message = Message.new
-      system_message.fan_art_id = @the_fan_art.id
-      system_message.role = "system"
-      system_message.content = "You are a #{@the_fan_art.topic} fanatic. Give the user a drawing project idea based on #{@the_fan_art.topic} that will include random #{@the_fan_art.topic} characters doing anything."
-      system_message.user_id = @current_user.id
-      system_message.save
-
-      user_message = Message.new
-      user_message.fan_art_id = @the_fan_art.id
-      user_message.role = "user"
-      user_message.content = "What #{@the_fan_art.topic} characters should I draw?"
-      user_message.user_id = @current_user.id
-      user_message.save
-
       client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
-
-      api_messages_array = Array.new
-
-      @fan_art_messages = Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at)
-
-      @fan_art_messages.each do |the_message|
-        message_hash = { :role => the_message.role, :content => the_message.content }
-
-        api_messages_array.push(message_hash)
-      end
 
       @response = client.chat(
         parameters: {
           model: "gpt-4",
-          messages: [{ role: "system", content: system_message.content },
-                     { role: "user", content: user_message.content }],
+          messages: [{ role: "system", content: "You are a #{@the_fan_art.topic} fanatic. Give the user an #{@the_fan_art.topic} character. Keep it one sentence." },
+                     { role: "user", content: "What #{@the_fan_art.topic} characters should I draw?" }],
           temperature: 1.0,
         },
       )
@@ -100,7 +63,6 @@ class FanArtsController < ApplicationController
 
     the_fan_art.topic = params.fetch("query_topic")
     the_fan_art.user_id = params.fetch("query_user_id")
-    the_fan_art.photos_count = params.fetch("query_photos_count")
 
     if the_fan_art.valid?
       the_fan_art.save

@@ -1,0 +1,24 @@
+<nav>
+  <ul>
+  <% if session.fetch(:user_id) == nil %>
+  <% else %>
+    <li>
+      <a href="/">Home</a>
+    </li>
+
+    <li>
+      <a href="/fan_arts">My projects</a>
+    </li>
+
+
+    <li>
+      <a href="/likes">My Likes</a>
+    </li>
+
+    <li>
+      <a href="/user_sign_out">Sign Out</a>
+    </li>
+
+  <% end %>
+  </ul>
+</nav>

@@ -10,9 +10,9 @@
 #  owner_id   :integer
 #
 class Photo < ApplicationRecord
-  belongs_to(:owner, { :required => true, :class_name => "User", :foreign_key => "owner_id", :counter_cache => :own_photos_count })
+  belongs_to(:owner, { :required => true, :class_name => "User", :foreign_key => "owner_id" })
   has_many(:likes, { :class_name => "Like", :foreign_key => "photo_id", :dependent => :destroy })
-  belongs_to(:fan_art, { :required => true, :class_name => "FanArt", :foreign_key => "fan_art_id", :counter_cache => true })
+  belongs_to(:fan_art, { :required => true, :class_name => "FanArt", :foreign_key => "fan_art_id" })
 
   validates(:owner_id, { :presence => true })
   validates(:image, { :presence => true })

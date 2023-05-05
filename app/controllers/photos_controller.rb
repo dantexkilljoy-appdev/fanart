@@ -20,8 +20,13 @@ class PhotosController < ApplicationController
   def create
     the_photo = Photo.new
     the_photo.fan_art_id = params.fetch("query_fan_art_id")
-    the_photo.image = params.fetch("query_image")
     the_photo.owner_id = params.fetch("query_owner_id")
+    the_prompt = params.fetch("query_prompt")
+    client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
+
+    response = client.images.generate(parameters: { prompt: the_prompt, size: "512x512" })
+
+    the_photo.image = response.fetch("data").at(0).fetch("url")
 
     if the_photo.valid?
       the_photo.save
@@ -41,7 +46,7 @@ class PhotosController < ApplicationController
 
     if the_photo.valid?
       the_photo.save
-      redirect_to("/photos/#{the_photo.id}", { :notice => "Photo updated successfully."} )
+      redirect_to("/photos/#{the_photo.id}", { :notice => "Photo updated successfully." })
     else
       redirect_to("/photos/#{the_photo.id}", { :alert => the_photo.errors.full_messages.to_sentence })
     end
@@ -53,6 +58,6 @@ class PhotosController < ApplicationController
 
     the_photo.destroy
 
-    redirect_to("/photos", { :notice => "Photo deleted successfully."} )
+    redirect_to("/photos", { :notice => "Photo deleted successfully." })
   end
 end

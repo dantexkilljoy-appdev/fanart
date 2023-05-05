@@ -1,11 +1,68 @@
 <div>
   <div>
     <h1>
-      Your project!
+      Your projects!
     </h1>
   </div>
 </div>
 
 <hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
 
-<%= @response.fetch("choices").at(0).fetch("message").fetch("content") %>
+        <th>
+          Topic
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_fan_arts.each do |a_fan_art| %>
+      <tr>
+        <td>
+          <%= a_fan_art.id %>
+        </td>
+
+        <td>
+          <%= a_fan_art.topic %>
+        </td>
+
+        <td>
+          <%= a_fan_art.user_id %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_fan_art.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_fan_art.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/fan_arts/<%= a_fan_art.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

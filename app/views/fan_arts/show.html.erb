@@ -23,20 +23,39 @@
         Topic
       </dt>
       <dd>
-        <%= @the_fan_art.topic %>
+        <%= @the_fan_art.topic.upcase %>
       </dd>
      </dl>
   </div>
 </div>
 
 <hr>
-
-<dl>
 <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
-    <dt><%= message.role %></dt>
-    <dd><%= simple_format(message.content) %></dd>
-  <% end %>
-</dl>
-
-
+  <%= simple_format(message.content) %>
 <hr>
+
+<div>
+  <div>
+    <h2>
+      Ready for your picture
+    </h2>
+
+    <form action="/insert_photo" method="post">
+      <div>
+        <input type="hidden" name="query_fan_art_id" value="<%= @the_fan_art.id %>">
+      </div>
+
+      <div>
+        <input type="hidden" name="query_owner_id" value="<%= @current_user.id %>">
+      </div>
+
+      <div>
+        <input type="hidden" name="query_prompt" value="<%= simple_format(message.content) %>">
+      </div>
+<% end %>
+      <button>
+        Generate Photo
+      </button>
+    </form>
+  </div>
+</div>
