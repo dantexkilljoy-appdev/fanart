@@ -1,40 +1,8 @@
 <div>
   <div>
     <h1>
-      List of all likes
+       All your likes
     </h1>
-  </div>
-</div>
-
-<hr>
-
-<div>
-  <div>
-    <h2>
-      Add a new like
-    </h2>
-
-    <form action="/insert_like" method="post">
-      <div>
-        <label for="photo_id_box">
-          Photo
-        </label>
-
-        <input type="text" id="photo_id_box" name="query_photo_id">
-      </div>
-
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
-
-      <button>
-        Create like
-      </button>
-    </form>
   </div>
 </div>
 
@@ -56,7 +24,11 @@
         </th>
 
         <th>
-          Created at
+          Topic
+        </th>
+
+        <th>
+          Description
         </th>
 
         <th>
@@ -67,31 +39,36 @@
         </th>
       </tr>
 
-      <% @list_of_likes.each do |a_like| %>
+      <% @list_of_likes.where({ user_id: @current_user.id }).each do |a_like| %>
       <tr>
         <td>
           <%= a_like.id %>
         </td>
 
         <td>
-          <%= a_like.photo_id %>
+          <img src="<%= a_like.photo.image %>">
         </td>
 
         <td>
-          <%= a_like.user_id %>
+          <%= a_like.user.username %>
         </td>
 
         <td>
-          <%= time_ago_in_words(a_like.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_like.updated_at) %> ago
+          <%= a_like.photo.fan_art.topic%>
         </td>
 
         <td>
-          <a href="/likes/<%= a_like.id %>">
-            Show details
-          </a>
+          <%= Message.where({ fan_art_id: a_like.photo.fan_art_id }).at(0).content %>
+        </td>
+
+        <td>
+          Liked <%= time_ago_in_words(a_like.created_at) %> ago
+        </td>
+
+        <td>
+        <a href="/delete_like/<%= a_like.id %>">
+          Unlike
+        </a>
         </td>
       </tr>
       <% end %>

@@ -13,4 +13,8 @@
 class Message < ApplicationRecord
   belongs_to(:user, { :required => true, :class_name => "User", :foreign_key => "user_id" })
   belongs_to(:fan_art, { :required => true, :class_name => "FanArt", :foreign_key => "fan_art_id" })
+
+  def content_formatted
+    self.content.gsub("\"", "")
+  end
 end
