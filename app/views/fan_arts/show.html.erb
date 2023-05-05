@@ -30,8 +30,8 @@
 </div>
 
 <hr>
-<% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
-  <%= simple_format(message.content) %>
+    <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
+      <%= simple_format(message.content) %>
 <hr>
 
 <div>
@@ -52,7 +52,9 @@
       <div>
         <input type="hidden" name="query_prompt" value="<%= simple_format(message.content) %>">
       </div>
-<% end %>
+      
+    <% end %>
+
       <button>
         Generate Photo
       </button>

@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Photo #<%= @the_photo.id %> details
+      <%= Message.where({ fan_art_id: @the_photo.fan_art_id }).first.content %>
     </h1>
 
     <div>
@@ -10,20 +10,46 @@
           Go back
         </a>
       </div>
-
+      <% if @current_user.id == @the_photo.owner_id %>
       <div>
         <a href="/delete_photo/<%= @the_photo.id %>">
           Delete photo
         </a>
       </div>
+      <% else %>
+      <% end %>
     </div>
 
+    <% if Like.where({ user_id: @current_user.id }).first == nil %>
+    <div>
+      <form action="/insert_like" method="post">
+        <div>
+          <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+        </div>
+
+        <div>
+          <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+        </div>
+
+        <button>
+          Like
+        </button>
+      </form>
+    </div>
+    <% else %>
+    <div>
+      <a href="/delete_like/<%= Like.where({ user_id: @current_user.id }).first.id %>">
+        Delete like
+      </a>
+    </div>
+    <% end %>
+    
     <dl>
       <dt>
-        Fan art
+        Fan art topic
       </dt>
       <dd>
-        <%= @the_photo.fan_art_id %>
+        <%= @the_photo.fan_art.topic %>
       </dd>
 
       <dt>
@@ -37,7 +63,7 @@
         Owner
       </dt>
       <dd>
-        <%= @the_photo.owner_id %>
+        <%= @the_photo.owner.username %>
       </dd>
 
       <dt>
@@ -54,47 +80,6 @@
         <%= time_ago_in_words(@the_photo.updated_at) %> ago
       </dd>
     </dl>
-  </div>
-</div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit photo
-    </h2>
-
-    <form action="/modify_photo/<%= @the_photo.id %>"  method="post" >
-      <div>
-        <label for="fan_art_id_box">
-          Fan art
-        </label>
-
-        <input type="text" id="fan_art_id_box" name="query_fan_art_id" value="<%= @the_photo.fan_art_id %>">
-      </div>
-
-      <div>
-        <label for="image_box">
-          Image
-        </label>
-
-        <input type="text" id="image_box" name="query_image" value="<%= @the_photo.image %>">
-      </div>
-
-      <div>
-        <label for="owner_id_box">
-          Owner
-        </label>
-
-        <input type="text" id="owner_id_box" name="query_owner_id" value="<%= @the_photo.owner_id %>">
-      </div>
-
-      <button>
-        Update photo
-      </button>
-    </form>
   </div>
 </div>
 

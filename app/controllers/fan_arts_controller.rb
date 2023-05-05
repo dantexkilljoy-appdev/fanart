@@ -36,7 +36,7 @@ class FanArtsController < ApplicationController
       @response = client.chat(
         parameters: {
           model: "gpt-4",
-          messages: [{ role: "system", content: "You are a #{@the_fan_art.topic} fanatic. Give the user an #{@the_fan_art.topic} character. Keep it one sentence." },
+          messages: [{ role: "system", content: "You are a #{@the_fan_art.topic} fanatic. Give the user an #{@the_fan_art.topic} character. Keep it one sentence and do not use quotes." },
                      { role: "user", content: "What #{@the_fan_art.topic} characters should I draw?" }],
           temperature: 1.0,
         },
