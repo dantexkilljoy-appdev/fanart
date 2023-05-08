@@ -1,78 +1,23 @@
 <div>
   <div>
     <h1>
-      List of all photos
+      Your Photos
     </h1>
   </div>
 </div>
 
 <hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Fan art
-        </th>
-
-        <th>
-          Image
-        </th>
-
-        <th>
-          Owner
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_photos.each do |a_photo| %>
-      <tr>
-        <td>
-          <%= a_photo.id %>
-        </td>
-
-        <td>
-          <%= a_photo.fan_art.topic%>
-        </td>
-
-        <td>
-          <img src="<%= a_photo.image %>">
-        </td>
-
-        <td>
-          <%= a_photo.owner.username %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_photo.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_photo.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/photos/<%= a_photo.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+<div class="card-group">
+  <div class="card">
+  <% @list_of_photos.each do |a_photo| %>
+  <img class="card-img-top" src="<%= a_photo.image %>" alt="Generated Image" >
+  <div class="card-body">
+    <h2 class="card-title"><%= a_photo.fan_art.topic.upcase%></h2>
+      <p class="card-text"><%= Message.where({ fan_art_id: a_photo.fan_art.id }).first.content %></p>
+      <a href="/photos/<%= a_photo.id %>" class="btn btn-primary">Check it out!</a>
   </div>
+  <% end %>
 </div>
-
 <hr>
+
+  

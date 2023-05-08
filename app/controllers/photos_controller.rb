@@ -24,7 +24,7 @@ class PhotosController < ApplicationController
     the_prompt = params.fetch("query_prompt")
     client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
 
-    response = client.images.generate(parameters: { prompt: the_prompt, size: "512x512" })
+    response = client.images.generate(parameters: { prompt: the_prompt, size: "256x256" })
 
     the_photo.image = response.fetch("data").at(0).fetch("url")
 

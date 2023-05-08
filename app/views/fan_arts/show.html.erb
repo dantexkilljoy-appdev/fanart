@@ -1,55 +1,27 @@
-<div>
-  <div>
-    <h1>
-      Fan art #<%= @the_fan_art.id %> details
-    </h1>
-
-    <div>
-      <div>
-        <a href="/fan_arts">
-          Go back
-        </a>
-      </div>
-
-      <div>
-        <a href="/delete_fan_art/<%= @the_fan_art.id %>">
-          Delete fan art
-        </a>
-      </div>
-    </div>
-
-    <dl>
-      <dt>
-        Topic
-      </dt>
-      <dd>
-        <%= @the_fan_art.topic.upcase %>
-      </dd>
-     </dl>
-  </div>
-</div>
-
-<hr>
-    <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
+<div class="jumbotron">
+  <h1 class="display-4"> <%= @the_fan_art.topic.upcase %></h1>
+  <p class="lead">
+  <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
+    <h2>
       <%= simple_format(message.content_formatted) %>
-<hr>
+    </h2>  
+  </p>
 
- <% if Photo.where({ owner_id: @current_user.id }).where({ fan_art_id: @the_fan_art.id }).first != nil %>
-<div>
-   <h4>
+  <hr class="my-4">
+  <p>
+    <h3>
+      Ready for your picture?
+    </h3>
+  </p>
+    <% if Photo.where({ owner_id: @current_user.id }).where({ fan_art_id: @the_fan_art.id }).first != nil %>
+  <p>
+    <h4>
       You already have a picture for this idea whould you like another one?
     </h4>
-</div>
-<% end %>
-
-<div>
-  <div>
-    <h2>
-      Ready for your picture
-    </h2>
-   
-
-    <form action="/insert_photo" method="post">
+  </p>
+    <% end %>
+  <p class="lead">
+   <form action="/insert_photo" method="post">
       <div>
         <input type="hidden" name="query_fan_art_id" value="<%= @the_fan_art.id %>">
       </div>
@@ -63,10 +35,9 @@
       </div>
       
     <% end %>
-
-      <button>
+      <button class="btn btn-primary btn-lg" role="button">
         Generate Photo
       </button>
+  </p>
     </form>
-  </div>
 </div>
