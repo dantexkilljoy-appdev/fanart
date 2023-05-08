@@ -12,18 +12,7 @@
  *
  *= require_self
  */
-.card-img-top { 
-  width: 100%;
-  height: 20vw;
-  object-fit: contain;
-}
 
-.card-group {
-  max-width: 20rem;
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.card { 
-  flex-direction: row;
+.photo-card {
+  min-width: 20rem !important;
 }
