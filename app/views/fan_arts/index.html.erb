@@ -7,62 +7,17 @@
 </div>
 
 <hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
+<div class="card border-primary mb-3" style="max-width: 18rem;">
+  <% @list_of_fan_arts.each do |a_fan_art| %>
 
-        <th>
-          Topic
-        </th>
+    <div class="card-body text-primary">
 
-        <th>
-          User
-        </th>
+      <h5 class="card-title"><%= a_fan_art.topic.upcase %></h5>
 
-        <th>
-          Created at
-        </th>
+      <p class="card-text"><small> Updated about <%= time_ago_in_words(a_fan_art.updated_at) %> ago</small></p>
 
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_fan_arts.each do |a_fan_art| %>
-      <tr>
-        <td>
-          <%= a_fan_art.id %>
-        </td>
-
-        <td>
-          <%= a_fan_art.topic %>
-        </td>
-
-        <td>
-          <%= a_fan_art.user.username %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_fan_art.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_fan_art.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/fan_arts/<%= a_fan_art.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+      <a href="/fan_arts/<%= a_fan_art.id %>" class="btn btn-primary">Check it out!</a>
+    </div>
+  <% end %>
   </div>
 </div>
