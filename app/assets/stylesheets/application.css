@@ -16,3 +16,13 @@
 .photo-card {
   min-width: 20rem !important;
 }
+
+.title {
+  font-size: large;
+  font-family: cursive;
+  color: aliceblue;
+}
+
+.display-1 {
+  color: #fffffe;
+}

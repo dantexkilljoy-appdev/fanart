@@ -1,5 +1,5 @@
 <div>
-  <div>
+  <div class="title">
     <h1>
       Welcome to Fan Art Generator
     </h1>
@@ -8,18 +8,18 @@
 
 <hr>
 
-<div>
+<div class="jumbotron" style="background-color: #eebbc3;">
   <div>
-    <h2>
+    <h2 class="display-1">
       Ready for you next piece?
     </h2>
 
+  <hr class="my-4">
+
     <form action="/insert_fan_art" method="post">
-      <div>
-        <label for="topic">
-          Want a specific genre?
-        </label>
-        <select id="topic" name="query_topic">
+
+      <div class="form-floating">
+        <select class="custom-select"  name="query_topic">
           <option value="anime">Anime</option>
           <option value="video games">Video Games</option>
           <option value="comics">Comics</option>
@@ -31,7 +31,8 @@
         <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
       </div>
 
-      <button>
+  <hr class="my-4">
+      <button class="btn btn-lg" role="button" style="background-color: #b8c1ec;">
         Generate an Idea
       </button>
     </form>
@@ -39,8 +40,3 @@
 </div>
 
 <hr>
-
-<div class="d-flex align-items-center">
-  <strong>Generating...</strong>
-  <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-</div>
