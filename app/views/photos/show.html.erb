@@ -1,20 +1,20 @@
 <div>
   <div>
-    <h1>
-      <%= Message.where({ fan_art_id: @the_photo.fan_art_id }).first.content %>
-    </h1>
-
-    <div>
-      <div>
-        <a href="/photos">
-          Go back
-        </a>
+    <div class="photo-button">
+      <div class="back-button">
+        <button type="button" class="btn btn-primary btn">
+          <a href="/photos">
+            Go back
+          </a>
+        </button>
       </div>
       <% if @current_user.id == @the_photo.owner_id %>
-      <div>
-        <a href="/delete_photo/<%= @the_photo.id %>">
-          Delete photo
-        </a>
+      <div class="delete-button">
+        <button type="button" class="btn btn-danger btn">
+          <a href="/delete_photo/<%= @the_photo.id %>">
+            Delete photo
+          </a>
+        </button>
       </div>
       <% else %>
       <% end %>
@@ -44,43 +44,12 @@
     </div>
     <% end %>
     
-    <dl>
-      <dt>
-        Fan art topic
-      </dt>
-      <dd>
-        <%= @the_photo.fan_art.topic %>
-      </dd>
-
-      <dt>
-        Image
-      </dt>
-      <dd>
-        <img src="<%= @the_photo.image %>">
-      </dd>
-
-      <dt>
-        Owner
-      </dt>
-      <dd>
-        <%= @the_photo.owner.username %>
-      </dd>
-
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_photo.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_photo.updated_at) %> ago
-      </dd>
-    </dl>
+  <div class="card">
+    <div class="card-body" style="background-image: linear-gradient(to bottom right, purple, rgba(0, 0, 255, 0.519));">
+    <h5 class="card-title"> <%= @the_photo.fan_art.topic.capitalize %> </h5>
+      <p class="card-text"> <%= Message.where({ fan_art_id: @the_photo.fan_art_id }).first.content %></p>
+      <p class="card-text"><small class="text-body-secondary"> <%= @the_photo.owner.username.capitalize %>'s image</small></p>
+    </div>
+    <img src="<%= @the_photo.image %>" class="card-img-bottom" alt="generated_image">
   </div>
-</div>
-
 <hr>

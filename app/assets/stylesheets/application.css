@@ -53,3 +53,24 @@
   align-items: baseline;
   max-height: 20rem;
 }
+
+.photo-button {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.back-button a {
+  color: #000000;
+}
+
+.back-button :hover {
+  text-decoration: none;
+}
+
+.delete-button a {
+  color: #000000;
+}
+
+.delete-button :hover {
+  text-decoration: none;
+}
