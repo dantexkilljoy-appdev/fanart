@@ -19,20 +19,23 @@
 
 .title {
   font-size: larger;
-  font-family: cursive;
+  font-family: fantasy;
   color: rgb(0, 0, 0);
+  text-shadow:  2px 2px rgb(255, 255, 255);
 }
 
-.display-1 {
-  color: #000000;
+.header {
+  text-shadow: 5rem purple;
+  font-family: fantasy;
+  font-size: 40px;
 }
-
 .main {
   background-image: url(https://media.tenor.com/L_tg3foVXJ0AAAAC/sky-aesthetic.gif);
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 60rem;
-}
+  /* background-image: linear-gradient(to bottom right, purple, rgba(0, 0, 255, 0.519)); */
+} */
 
 .sign-out a {
   color: #000000;
@@ -42,4 +45,11 @@
 
 .sign-out :hover {
   text-decoration: none;
+}
+
+.ai-pic {
+  display: flex;
+  justify-content: right;
+  align-items: baseline;
+  max-height: 20rem;
 }

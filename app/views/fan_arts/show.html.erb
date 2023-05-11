@@ -1,21 +1,21 @@
-<div class="jumbotron" style="background-color: blue; opacity: 90%;">
-  <h1 class="display-4" style="color: white;"> <%= @the_fan_art.topic.upcase %></h1>
+<div class="jumbotron" style="background-color: #CBC3E3; opacity: 90%; border-radius: 20%;">
+  <h1 class="display-4" style="font-family: fantasy; text-shadow:  2px 2px rgb(255, 255, 255);"> <%= @the_fan_art.topic.upcase %></h1>
   <p class="lead" style="color: white;">
   <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
-    <h2 style="color: white;">
+    <h2 style="font-family: fantasy; text-shadow:  2px 2px rgb(255, 255, 255);">
       <%= simple_format(message.content_formatted) %>
     </h2>  
   </p>
 
   <hr class="my-4">
   <p>
-    <h3 style="color: white;">
+    <h3 style="font-family: fantasy; text-shadow:  2px 2px rgb(255, 255, 255);">
       Ready for your picture?
     </h3>
   </p>
     <% if Photo.where({ owner_id: @current_user.id }).where({ fan_art_id: @the_fan_art.id }).first != nil %>
   <p>
-    <h4 style="color: white;">
+    <h4 style="font-family: fantasy;" text-shadow:  2px 2px rgb(255, 255, 255);>
       You already have a picture for this idea whould you like another one?
     </h4>
   </p>

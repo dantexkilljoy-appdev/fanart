@@ -1,22 +1,22 @@
 <div>
   <div>
-    <h1>
-      Your projects!
+    <h1 style="font-family: fantasy;">
+      Your Projects!
     </h1>
   </div>
 </div>
 
 <hr>
-<div class="card border-primary mb-3" style="max-width: 18rem;">
+<div class="card border-primary mb-3" style="max-width: 30rem; background-image: linear-gradient(to bottom right, #CBC3E3, rgba(0, 0, 255, 0.519)); border-radius: 3%; box-shadow: 5px 5px black;">
   <% @list_of_fan_arts.each do |a_fan_art| %>
 
-    <div class="card-body text-success">
+    <div class="card-body text-dark">
 
-      <h5 class="card-title"><%= a_fan_art.topic.upcase %></h5>
+      <h5 class="card-title" style="font-family: fantasy;"><%= a_fan_art.topic.upcase %></h5>
 
       <p class="card-text"><small> Updated about <%= time_ago_in_words(a_fan_art.updated_at) %> ago</small></p>
 
-      <a href="/fan_arts/<%= a_fan_art.id %>" class="btn btn-success">Check it out!</a>
+      <a href="/fan_arts/<%= a_fan_art.id %>" class="btn btn-primary">Check it out!</a>
     </div>
   <% end %>
   </div>
