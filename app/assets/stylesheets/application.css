@@ -18,7 +18,7 @@
 }
 
 .title {
-  font-size: large;
+  font-size: larger;
   font-family: cursive;
   color: rgb(0, 0, 0);
 }
@@ -31,16 +31,15 @@
   background-image: url(https://media.tenor.com/L_tg3foVXJ0AAAAC/sky-aesthetic.gif);
   background-repeat: no-repeat;
   background-size: cover;
-  min-height: 100rem;
+  min-height: 60rem;
 }
 
 .sign-out a {
   color: #000000;
   text-decoration: none;
+  font-size: 40px;
 }
 
-.feed {
-  color: #000000;
+.sign-out :hover {
   text-decoration: none;
-  flex-direction: column-reverse;
 }

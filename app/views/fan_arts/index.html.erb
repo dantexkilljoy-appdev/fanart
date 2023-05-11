@@ -10,13 +10,13 @@
 <div class="card border-primary mb-3" style="max-width: 18rem;">
   <% @list_of_fan_arts.each do |a_fan_art| %>
 
-    <div class="card-body text-primary">
+    <div class="card-body text-success">
 
       <h5 class="card-title"><%= a_fan_art.topic.upcase %></h5>
 
       <p class="card-text"><small> Updated about <%= time_ago_in_words(a_fan_art.updated_at) %> ago</small></p>
 
-      <a href="/fan_arts/<%= a_fan_art.id %>" class="btn btn-primary">Check it out!</a>
+      <a href="/fan_arts/<%= a_fan_art.id %>" class="btn btn-success">Check it out!</a>
     </div>
   <% end %>
   </div>

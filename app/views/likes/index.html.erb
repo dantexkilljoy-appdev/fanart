@@ -7,73 +7,21 @@
 </div>
 
 <hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
+<div class="card-deck">
+ <% @list_of_likes.where({ user_id: @current_user.id }).each do |a_like| %>
+    <div class="card mb-4 photo-card">
+      <img class="card-img-top" src="<%= a_like.photo.image %>" alt="Generated Image" >
+      <div class="card-body">
+        <h2 class="card-title"><%= a_like.photo.fan_art.topic %></h2>
+          <p class="card-text">By <%= a_like.user.username %></p>
+          <p class="card-text"><%= Message.where({ fan_art_id: a_like.photo.fan_art_id }).at(0).content %></p>
+      </div>
+      <div class="card-footer">
+        <a href="/delete_like/<%= a_like.id %>" class="btn btn-outline-info w-100">Unlike</a>
 
-        <th>
-          Photo
-        </th>
-
-        <th>
-          User
-        </th>
-
-        <th>
-          Topic
-        </th>
-
-        <th>
-          Description
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_likes.where({ user_id: @current_user.id }).each do |a_like| %>
-      <tr>
-        <td>
-          <%= a_like.id %>
-        </td>
-
-        <td>
-          <img src="<%= a_like.photo.image %>">
-        </td>
-
-        <td>
-          <%= a_like.user.username %>
-        </td>
-
-        <td>
-          <%= a_like.photo.fan_art.topic%>
-        </td>
-
-        <td>
-          <%= Message.where({ fan_art_id: a_like.photo.fan_art_id }).at(0).content %>
-        </td>
-
-        <td>
-          Liked <%= time_ago_in_words(a_like.created_at) %> ago
-        </td>
-
-        <td>
-        <a href="/delete_like/<%= a_like.id %>">
-          Unlike
-        </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+        <p Liked <%= time_ago_in_words(a_like.created_at) %> ago</p>
+      </div>
+    </div>
+  <% end %>
 </div>
-
 <hr>

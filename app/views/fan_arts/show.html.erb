@@ -1,21 +1,21 @@
-<div class="jumbotron">
-  <h1 class="display-4"> <%= @the_fan_art.topic.upcase %></h1>
-  <p class="lead">
+<div class="jumbotron" style="background-color: blue; opacity: 90%;">
+  <h1 class="display-4" style="color: white;"> <%= @the_fan_art.topic.upcase %></h1>
+  <p class="lead" style="color: white;">
   <% Message.where({ :fan_art_id => @the_fan_art.id }).order(:created_at).each do |message| %>
-    <h2>
+    <h2 style="color: white;">
       <%= simple_format(message.content_formatted) %>
     </h2>  
   </p>
 
   <hr class="my-4">
   <p>
-    <h3>
+    <h3 style="color: white;">
       Ready for your picture?
     </h3>
   </p>
     <% if Photo.where({ owner_id: @current_user.id }).where({ fan_art_id: @the_fan_art.id }).first != nil %>
   <p>
-    <h4>
+    <h4 style="color: white;">
       You already have a picture for this idea whould you like another one?
     </h4>
   </p>
@@ -35,7 +35,7 @@
       </div>
       
     <% end %>
-      <button class="btn btn-primary btn-lg" role="button">
+      <button class="btn btn-info btn-lg" role="button">
         Generate Photo
       </button>
   </p>

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light mb-4">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <%= image_tag 'fanart_generator.jpg', style: 'max-width: 5rem;' %>
+      <%= image_tag 'fanart_generator.jpg', style: 'max-width: 8rem; border-radius: 25%;' %>
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 40px; color: black;">
             For You
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: purple; font-size: large;">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: purple; font-size: large; opacity: 95%;">
             <a href="/likes" class="dropdown-item">
               My Likes
             </a>
@@ -41,18 +41,11 @@
             </a>
 
             <a href="/photos" class="dropdown-item">
-              My Photos
+              All Photos
             </a>
           </div>
         </li>
       </ul>
-
-      <div class="feed">
-        <a href="/photos">
-          The Feed
-        </a>
-      </div>
-
       <div class="sign-out">
         <a href="/user_sign_out">
           Sign Out
