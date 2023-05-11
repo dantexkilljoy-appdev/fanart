@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light mb-4" style="background-color: #b8c1ec;">
+<nav class="navbar navbar-expand-lg navbar-light mb-4">
   <div class="container">
     <a class="navbar-brand" href="/">
       <%= image_tag 'fanart_generator.jpg', style: 'max-width: 5rem;' %>
@@ -28,10 +28,10 @@
       <% else %>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 40px; color: black;">
             For You
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: purple; font-size: large;">
             <a href="/likes" class="dropdown-item">
               My Likes
             </a>
@@ -43,13 +43,21 @@
             <a href="/photos" class="dropdown-item">
               My Photos
             </a>
-
-            <a href="/user_sign_out" class="dropdown-item">
-              Sign Out
-            </a>
           </div>
         </li>
       </ul>
+
+      <div class="feed">
+        <a href="/photos">
+          The Feed
+        </a>
+      </div>
+
+      <div class="sign-out">
+        <a href="/user_sign_out">
+          Sign Out
+        </a>
+      </div>
       <% end %>
     </div> <!-- .navbar-collapse -->
   </div> <!-- .container -->

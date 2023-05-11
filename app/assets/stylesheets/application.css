@@ -20,9 +20,27 @@
 .title {
   font-size: large;
   font-family: cursive;
-  color: aliceblue;
+  color: rgb(0, 0, 0);
 }
 
 .display-1 {
-  color: #fffffe;
+  color: #000000;
+}
+
+.main {
+  background-image: url(https://media.tenor.com/L_tg3foVXJ0AAAAC/sky-aesthetic.gif);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100rem;
+}
+
+.sign-out a {
+  color: #000000;
+  text-decoration: none;
+}
+
+.feed {
+  color: #000000;
+  text-decoration: none;
+  flex-direction: column-reverse;
 }
