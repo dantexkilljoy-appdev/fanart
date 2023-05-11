@@ -51,7 +51,7 @@ class FanArtsController < ApplicationController
       @assistant_message.user_id = @current_user.id
       @assistant_message.save
 
-      redirect_to("/fan_arts/#{@the_fan_art.id}", { :notice => "Fan art created successfully." })
+      redirect_to("/fan_arts/#{@the_fan_art.id}", { :notice => "Fan art generated." })
     else
       redirect_to("/fan_arts/#{@the_fan_art.id}", { :alert => @the_fan_art.errors.full_messages.to_sentence })
     end
