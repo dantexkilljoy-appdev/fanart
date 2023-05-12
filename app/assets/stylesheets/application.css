@@ -30,12 +30,13 @@
   font-size: 40px;
 }
 .main {
-  background-image: url(https://media.tenor.com/L_tg3foVXJ0AAAAC/sky-aesthetic.gif);
+  background-image: url(sky-aesthetic.gif);
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 60rem;
+  image-rendering: -webkit-optimize-contrast;
   /* background-image: linear-gradient(to bottom right, purple, rgba(0, 0, 255, 0.519)); */
-} */
+} 
 
 .sign-out a {
   color: #000000;

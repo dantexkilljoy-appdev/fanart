@@ -32,13 +32,22 @@
       </div>
 
   <hr class="my-4">
-      <button class="btn btn-lg bg-primary" role="button">
+      <button id="spinner" class="btn btn-lg bg-primary" role="button" onclick="f()">
         Generate an Idea
       </button>
     </form>
   </div>
 </div>
 
+<script>
+  function f() {
+    var s= '<div class="btn btn-lg btn-primary">\
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+  Generating...</div>';
+    console.log(s);
+    document.getElementById("spinner").innerHTML = s;
+  }
+</script>
 <hr>
 
 <div class="ai-pic">

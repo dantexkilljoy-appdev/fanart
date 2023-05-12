@@ -35,9 +35,19 @@
       </div>
       
     <% end %>
-      <button class="btn btn-info btn-lg" role="button">
+      <button id="generator" class="btn btn-info btn-lg" role="button" onclick="f()">
         Generate Photo
       </button>
   </p>
     </form>
 </div>
+
+<script>
+  function f() {
+    var s= '<div class="btn btn-lg btn-info">\
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>\
+  Generating...</div>';
+    console.log(s);
+    document.getElementById("generator").innerHTML = s;
+  }
+</script>
