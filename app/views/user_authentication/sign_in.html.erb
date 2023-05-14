@@ -1,13 +1,13 @@
-<h1>Sign in</h1>
+<h1 class="sign_in_header">Sign in</h1>
 
 <form action="/user_verify_credentials" method="post">
   <div class="form-floating mb-3">
     <input type="email" class="form-control" id="floatingInput"name="query_email" placeholder="name@example.com">
-    <label for="floatingInput">Email address</label>
+    <label for="floatingInput" style="font-size: larger">Email address</label>
   </div>
   <div class="form-floating">
     <input type="password" class="form-control" id="floatingPassword" name="query_password" placeholder="Password">
-    <label for="floatingPassword">Password</label>
+    <label for="floatingPassword" style="font-size: larger">Password</label>
   </div>
 
   <button class="btn btn-primary">
@@ -17,6 +17,6 @@
 
 <hr>
 
-<p>
+<p class="sign_up_text">
   Or, <a href="/user_sign_up">Sign up</a> instead.
 </p>

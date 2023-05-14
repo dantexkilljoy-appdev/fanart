@@ -75,3 +75,16 @@
 .delete-button :hover {
   text-decoration: none;
 }
+
+.sign_up_text {
+  text-decoration: solid;
+  font-size: larger;
+}
+
+.sign_up_text a {
+  color: white;
+}
+
+.sign_in_header {
+  font-size: 60px; 
+}
