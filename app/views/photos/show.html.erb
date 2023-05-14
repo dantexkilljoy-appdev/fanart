@@ -1,56 +1,56 @@
 <div>
   <div>
-    <div class="photo-button">
-      <div class="back-button">
-        <button type="button" class="btn btn-primary btn">
-          <a href="/photos">
-            Go back
-          </a>
-        </button>
+    <div class="button_spacing">
+      <div class="photo-button">
+        <div class="back-button">
+          <button type="button" class="btn btn-primary btn">
+            <a href="/photos">
+              Go back
+            </a>
+          </button>
+        </div>
+        <% if @current_user.id == @the_photo.owner_id %>
+        <div class="delete-button">
+          <button type="button" class="btn btn-danger btn">
+            <a href="/delete_photo/<%= @the_photo.id %>">
+              Delete photo
+            </a>
+          </button>
+        </div>
+        <% else %>
+        <% end %>
       </div>
-      <% if @current_user.id == @the_photo.owner_id %>
-      <div class="delete-button">
-        <button type="button" class="btn btn-danger btn">
-          <a href="/delete_photo/<%= @the_photo.id %>">
-            Delete photo
-          </a>
-        </button>
+
+      <% if Like.where({ user_id: @current_user.id }).first == nil %>
+      <div class="like_box">
+        <form action="/insert_like" method="post">
+          <div>
+            <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
+          </div>
+
+          <div>
+            <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
+          </div>
+
+          <button class="like">
+            <i class="fa-regular fa-heart fa-beat fa-2xl" style="color: #ff0000;"></i>
+          </button>
+        </form>
       </div>
       <% else %>
+      <div>
+        <a href="/delete_like/<%= Like.where({ user_id: @current_user.id }).first.id %>">
+          <i class="fa-solid fa-heart fa-2xl" style="color: #ff0000;"></i>
+        </a>
+      </div>
       <% end %>
     </div>
-
-    <% if Like.where({ user_id: @current_user.id }).first == nil %>
-    <div>
-      <form action="/insert_like" method="post">
-        <div>
-          <input type="hidden" name="query_photo_id" value="<%= @the_photo.id %>">
-        </div>
-
-        <div>
-          <input type="hidden" name="query_user_id" value="<%= @current_user.id %>">
-        </div>
-
-        <button class="like">
-          <svg class="svg-inline--fa fa-heart fa-lg" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="heart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"> 
-            <path fill="currentColor" d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
-          </svg>
-        </button>
-      </form>
-    </div>
-    <% else %>
-    <div>
-      <a href="/delete_like/<%= Like.where({ user_id: @current_user.id }).first.id %>">
-        Delete like
-      </a>
-    </div>
-    <% end %>
     
   <div class="card">
-    <div class="card-body" style="background-image: linear-gradient(to bottom right, purple, rgba(0, 0, 255, 0.519));">
-    <h5 class="card-title"> <%= @the_photo.fan_art.topic.capitalize %> </h5>
-      <p class="card-text"> <%= Message.where({ fan_art_id: @the_photo.fan_art_id }).first.content %></p>
-      <p class="card-text"><small class="text-body-secondary"> <%= @the_photo.owner.username.capitalize %>'s image</small></p>
+    <div class="card-body" style="background-color: rgb(200, 174, 243);">
+    <h3 class="card-title" style="font-size: 40px; font-family: 'Mogra', cursive;"> <%= @the_photo.fan_art.topic.capitalize %> </h3>
+      <p class="card-text" style="font-size: 30px; font-family: 'Mogra', cursive;"> <%= Message.where({ fan_art_id: @the_photo.fan_art_id }).first.content %></p>
+      <p class="card-text"><small class="text-body-secondary" style="font-size: 20px; font-family: 'Mogra', cursive;"> <%= @the_photo.owner.username.capitalize %>'s image</small></p>
     </div>
     <img src="<%= @the_photo.image %>" class="card-img-bottom" alt="generated_image">
   </div>

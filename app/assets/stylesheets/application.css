@@ -19,14 +19,14 @@
 
 .title {
   font-size: larger;
-  font-family: fantasy;
+  font-family: 'Mogra', cursive;
   color: rgb(0, 0, 0);
-  text-shadow:  2px 2px rgb(255, 255, 255);
+  text-shadow:  2px 2px rgb(200, 174, 243);
 }
 
 .header {
   text-shadow: 5rem purple;
-  font-family: fantasy;
+  font-family: 'Mogra', cursive;
   font-size: 40px;
 }
 .main {
@@ -87,4 +87,28 @@
 
 .sign_in_header {
   font-size: 60px; 
+}
+
+.like {
+  cursor: pointer;
+  border: 1px solid #3498db;
+  background-color: transparent;
+}
+
+.like_box {
+  display: flex;
+  justify-content: center;
+}
+
+.button_spacing {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.back-button {
+  margin-right: 30px;
+}
+
+.delete-button {
+  margin-left: 30px;
 }
