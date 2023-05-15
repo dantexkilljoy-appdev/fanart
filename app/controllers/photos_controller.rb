@@ -26,7 +26,8 @@ class PhotosController < ApplicationController
 
     response = client.images.generate(parameters: { prompt: the_prompt, size: "256x256" })
 
-    the_photo.image = response.fetch("data").at(0).fetch("url")
+    # TODO: download image at this url
+    the_photo.remote_image_url = response.fetch("data").at(0).fetch("url")
 
     if the_photo.valid?
       the_photo.save
