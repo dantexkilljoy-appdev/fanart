@@ -22,7 +22,7 @@ class PhotosController < ApplicationController
     the_photo.fan_art_id = params.fetch("query_fan_art_id")
     the_photo.owner_id = params.fetch("query_owner_id")
     the_prompt = params.fetch("query_prompt")
-    client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
+    client = OpenAI::Client.new(access_token: ENV["API_TOKEN"])
 
     response = client.images.generate(parameters: { prompt: the_prompt, size: "256x256" })
 

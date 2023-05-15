@@ -31,7 +31,7 @@ class FanArtsController < ApplicationController
     if @the_fan_art.valid?
       @the_fan_art.save
 
-      client = OpenAI::Client.new(access_token: Rails.application.credentials.dig(:openai, :api_token))
+      client = OpenAI::Client.new(access_token: ENV["API_TOKEN"])
 
       @response = client.chat(
         parameters: {
